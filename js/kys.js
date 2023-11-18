@@ -112,6 +112,36 @@ button.addEventListener('click', function playAudio() {
     animateCSS('.discordframe', 'fadeInDown');
 });
 
+async function getDominantColor(iurl) {
+    const url = 'https://api.ximilar.com/dom_colors/generic/v2/dominantcolor';
+    const headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Token 05dc7ca33cb5eb482810bca7a99ae01b83232d90'
+    };
+    const body = {
+        records: [
+            {
+                _url: iurl
+            }
+        ],
+        colors: 3
+    };
+
+    const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(body)
+    });
+
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    console.log(response);
+    const data = await response.json();
+    return data;
+}
+
 
 class Discord {
     constructor(userId) {
@@ -129,7 +159,6 @@ class Discord {
 
 document.addEventListener('DOMContentLoaded', fetchUserData);
 
-const colorThief = new ColorThief();
 
 async function fetchUserData() {
     const discord = new Discord('1105349571678318672');
@@ -179,7 +208,11 @@ async function fetchUserData() {
         details.innerHTML = "";
     }
     imageElement.src = image;
-    console.log(colorThief.getColor(imageElement));
+
+    const dominantColor = await getDominantColor(image);
+    const color = dominantColor.records[0]._dominant_colors.rgb_colors[0];
+    const discordframe = document.querySelector(".discordframe");
+    discordframe.style.backgroundColor = `rgba(${color[0]}, ${color[1]}, ${color[2]}, 0.416)`;
 }
 
 

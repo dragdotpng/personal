@@ -134,7 +134,7 @@ async function fetchUserData() {
     const data = await discord.getUserData();
     let image, activityname, activitydetails;
 
-    if (data.data.activities.length === 0) {
+    if (data.data.activities == []) {
         image = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
         activityname = `Not doing anything`;
         activitydetails = ``;

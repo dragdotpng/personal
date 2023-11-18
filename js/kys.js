@@ -129,35 +129,60 @@ class Discord {
 
 document.addEventListener('DOMContentLoaded', fetchUserData);
 
+const colorThief = new ColorThief();
+
 async function fetchUserData() {
     const discord = new Discord('1105349571678318672');
     const data = await discord.getUserData();
     let image, activityname, activitydetails;
 
-    if (data.data.activities == []) {
-        image = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
-        activityname = `Not doing anything`;
-        activitydetails = ``;
-    } else {
-        if (data.data.activities[0].assets.large_image.includes("spotify")) {
-            url = data.data.activities[0].assets.large_image.replace("spotify:", "");
-            image = `https://i.scdn.co/image/` + url;
-        } else if (data.data.activities[0].assets.large_image.includes("mp:external")) {
-            url = data.data.activities[0].assets.large_image.replace("mp:external/", "");
-            url = url.split("/https/")[1];
-            image = "https://" + url;
+    if (!data.data.activities[0].assets) {
+        if (data.data.activities[0].name == "SoundCloud") {
+            image = `https://cdn.discordapp.com/app-assets/802958833214423081/802962390906830898.png`;
         } else {
-            image = `https://cdn.discordapp.com/app-assets/${data.data.activities[0].application_id}/${data.data.activities[0].assets.large_image}.png`;
+            image = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
         }
-        activityname = data.data.activities[0].name;
-        activitydetails = data.data.activities[0].details;
-    }
+    } else
+        if (data.data.activities == []) {
+            image = `https://cdn.discordapp.com/avatars/${data.data.discord_user.id}/${data.data.discord_user.avatar}.png`;
+            activityname = `Not doing anything`;
+            activitydetails = ``;
+        } else {
+            if (data.data.activities[0].assets.large_image.includes("spotify")) {
+                url = data.data.activities[0].assets.large_image.replace("spotify:", "");
+                image = `https://i.scdn.co/image/` + url;
+            } else if (data.data.activities[0].assets.large_image.includes("mp:external")) {
+                url = data.data.activities[0].assets.large_image.replace("mp:external/", "");
+                url = url.split("/https/")[1];
+                image = "https://" + url;
+            } else {
+                image = `https://cdn.discordapp.com/app-assets/${data.data.activities[0].application_id}/${data.data.activities[0].assets.large_image}.png`;
+            }
+            activityname = data.data.activities[0].name;
+            activitydetails = data.data.activities[0].details;
+        }
 
     const activity = document.getElementById("activity");
     const details = document.getElementById("details");
     const imageElement = document.getElementById("image");
 
-    activity.innerHTML = activityname;
-    details.innerHTML = activitydetails;
+
+    if (activityname) {
+        activity.innerHTML = activityname.replace("undefined", "");
+    } else {
+        activity.innerHTML = "Not doing anything";
+    }
+    
+    if (activitydetails) {
+        details.innerHTML = activitydetails.replace("undefined", "");
+    } else {
+        details.innerHTML = "";
+    }
     imageElement.src = image;
+    console.log(colorThief.getColor(imageElement));
 }
+
+
+setInterval(() => {
+    fetchUserData();
+}, 5000);

@@ -1,0 +1,109 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url(https://c0.wallpaperflare.com/path/476/183/779/arches-architecture-black-and-white-building-27a762e47f96a2e1851820e9e5cadc9b.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    font-family: Satoshi,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+}
+
+.frame {
+    width: 25%;
+    height: 25%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(2.5px);
+    opacity: 0;
+}
+
+.discordframe {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 5;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.116);
+    border-radius: 10px;
+    padding: 10px;
+    color: white;
+    backdrop-filter: blur(2.5px);
+    width: fit-content;
+    padding-right: 20px;
+    margin-top: 10px;
+    z-index: 2;
+    opacity: 0;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 15px;
+}
+
+
+.description {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: #fff 0px 0px 10px;
+}
+
+.username {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    text-shadow: #fff 0px 0px 10px;
+    font-weight: bold;
+}
+
+.discordactivity {
+    font-size: 1.3rem;
+    text-shadow: #fff 0px 0px 10px;
+    font-weight: bold;
+}
+
+.discorddetails {
+    font-size: 1rem;
+    text-shadow: #fff 0px 0px 10px;
+    margin-top: -15px;
+}
+
+.profilepic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-image: url(https://cdn.discordapp.com/avatars/1105349571678318672/ecd76089be6de72a612abd0671a5ef28.webp?size=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.clickme {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #fff;
+    text-shadow: #fff 0px 0px 10px;
+    font-weight: bold;
+    cursor: pointer;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 4;
+    transition: all 0.5s ease;
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+}

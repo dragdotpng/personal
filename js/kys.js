@@ -135,7 +135,16 @@ async function fetchUserData() {
         activityname = `Not doing anything`;
         activitydetails = ``;
     } else {
-        image = `https://cdn.discordapp.com/app-assets/${data.data.activities[0].application_id}/${data.data.activities[0].assets.large_image}.png`;
+        if (data.data.activities[0].assets.large_image.includes("spotify")) {
+            url = data.data.activities[0].assets.large_image.replace("spotify:", "");
+            image = `https://i.scdn.co/image/` + url;
+        } else if (data.data.activities[0].assets.large_image.includes("mp:external")) {
+            url = data.data.activities[0].assets.large_image.replace("mp:external/", "");
+            url = url.split("/https/")[1];
+            image = "https://" + url;
+        } else {
+            image = `https://cdn.discordapp.com/app-assets/${data.data.activities[0].application_id}/${data.data.activities[0].assets.large_image}.png`;
+        }
         activityname = data.data.activities[0].name;
         activitydetails = data.data.activities[0].details;
     }

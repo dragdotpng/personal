@@ -89,6 +89,10 @@ button.addEventListener('click', function playAudio() {
     button.style.opacity = 0;
     button.removeEventListener('click', playAudio);
 
+    setTimeout(() => {
+        button.remove();
+    }, 500);
+
     elements.forEach(async (el) => {
         const fx = new TextScramble(el);
         const phrases = [el.innerText];
